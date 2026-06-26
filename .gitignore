@@ -1,31 +1,7 @@
-# Dependencies
 node_modules/
-*.lock
-package-lock.json
-yarn.lock
-
-# Build
 dist/
-build/
 *.log
-
-# IDE
+.DS_Store
+.env
 .vscode/
 .idea/
-*.swp
-*.swo
-*~
-.DS_Store
-
-# Environment
-.env
-.env.local
-.env.*.local
-
-# Cache
-.cache/
-.parcel-cache/
-
-# OS
-Thumbs.db
-.DS_Store

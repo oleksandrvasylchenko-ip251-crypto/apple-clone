@@ -4,16 +4,12 @@ import "../styles/main.scss";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-// @ts-ignore
-import "./threeScene";
-
 gsap.registerPlugin(ScrollTrigger);
 
 // ===== BURGER MENU =====
 const burger = document.querySelector(".burger");
 const mobileMenu = document.querySelector(".mobile-menu");
 const closeMenuBtn = document.querySelector(".close-menu");
-const mobileLinks = mobileMenu?.querySelectorAll("a");
 
 burger?.addEventListener("click", () => {
     mobileMenu?.classList.toggle("active");
@@ -25,7 +21,7 @@ closeMenuBtn?.addEventListener("click", () => {
     burger?.classList.remove("active");
 });
 
-mobileLinks?.forEach(link => {
+mobileMenu?.querySelectorAll("a").forEach(link => {
     link.addEventListener("click", () => {
         mobileMenu?.classList.remove("active");
         burger?.classList.remove("active");
@@ -40,7 +36,6 @@ document.addEventListener("keydown", (e) => {
     }
 });
 
-// Load dark mode preference
 if (localStorage.getItem("darkMode") === "true") {
     document.body.classList.add("dark");
 }
@@ -82,19 +77,6 @@ gsap.from(".hero-dark-title", {
     y: -100,
     opacity: 0,
     duration: 1,
-    ease: "power2.out",
-    scrollTrigger: {
-        trigger: ".hero-dark",
-        start: "top center"
-    }
-});
-
-gsap.from(".hero-dark-subtitle", {
-    y: 50,
-    opacity: 0,
-    duration: 1,
-    delay: 0.2,
-    ease: "power2.out",
     scrollTrigger: {
         trigger: ".hero-dark",
         start: "top center"
@@ -149,7 +131,6 @@ const slidesWrapper = document.querySelector(".slides-wrapper");
 
 if (slides.length > 0) {
     const updateSlider = (index: number) => {
-        // Validate index
         if (index < 0) index = slides.length - 1;
         if (index >= slides.length) index = 0;
 
@@ -167,7 +148,6 @@ if (slides.length > 0) {
         });
         dots[index]?.classList.add("active");
 
-        // Reset autoplay
         resetAutoplay();
     };
 
@@ -196,14 +176,13 @@ if (slides.length > 0) {
     prevBtn?.addEventListener("click", prevSlide);
     nextBtn?.addEventListener("click", nextSlide);
 
-    // Dot clicks
     dots.forEach((dot, index) => {
         dot.addEventListener("click", () => {
             updateSlider(index);
         });
     });
 
-    // Keyboard navigation
+    // Keyboard
     document.addEventListener("keydown", (e) => {
         if (e.key === "ArrowRight") nextSlide();
         if (e.key === "ArrowLeft") prevSlide();
@@ -220,11 +199,10 @@ if (slides.length > 0) {
         startAutoplay();
     });
 
-    // Start autoplay
     startAutoplay();
 }
 
-// ===== SMOOTH SCROLL FOR HASH LINKS =====
+// ===== SMOOTH SCROLL =====
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener("click", function (e) {
         const href = this.getAttribute("href");
@@ -241,9 +219,4 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
-// ===== SCROLL TRIGGER CLEANUP =====
-window.addEventListener("beforeunload", () => {
-    ScrollTrigger.getAll().forEach(trigger => trigger.kill());
-});
-
-console.log("🍎 Apple Clone loaded successfully!");
+console.log("✅ Apple Clone loaded!");

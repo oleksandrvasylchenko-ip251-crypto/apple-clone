@@ -52,8 +52,8 @@ module.exports = {
     }),
     new CopyPlugin({
       patterns: [
-        { 
-          from: "src/assets", 
+        {
+          from: "src/assets",
           to: "assets",
           globOptions: {
             ignore: ["**/node_modules"]
